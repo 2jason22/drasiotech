@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRASIOTECH | L'EXCELLENCE INFORMATIQUE</title>
+    <style>
+        :root {
+            --matrix-green: #00ff41;
+            --dark-bg: #050505;
+            --card-bg: #0d0d0d;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--dark-bg);
+            color: #eee;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* --- SECTIONS MASSIVES --- */
+        section {
+            padding: 100px 5%;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        h1 { font-size: 5rem; color: var(--matrix-green); text-shadow: 0 0 20px var(--matrix-green); margin: 0; }
+        h2 { font-size: 3rem; color: var(--matrix-green); margin-bottom: 40px; }
+        p { font-size: 1.5rem; max-width: 900px; margin: 20px auto; color: #bbb; }
+
+        /* --- PRÉSENTATION (TOP) --- */
+        .hero {
+            background: radial-gradient(circle, #00220a 0%, #050505 100%);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- SERVICES (GROS BLOCS) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 2px solid #222;
+            padding: 40px;
+            transition: 0.3s;
+        }
+        .card:hover { border-color: var(--matrix-green); box-shadow: 0 0 30px rgba(0,255,65,0.1); }
+        .card h3 { font-size: 2rem; color: var(--matrix-green); }
+
+        /* --- VIDÉO 16:9 --- */
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 exact */
+            height: 0;
+            max-width: 1000px;
+            margin: 50px auto;
+            border: 3px solid var(--matrix-green);
+        }
+        .video-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* --- AVIS DÉFILANTS --- */
+        .marquee-zone { background: #000; padding: 40px 0; overflow: hidden; white-space: nowrap; }
+        .marquee-inner { display: inline-block; animation: scroll 40s linear infinite; }
+        .rev { display: inline-block; margin: 0 50px; font-size: 1.5rem; color: var(--matrix-green); }
+
+        /* --- ZONE JEUX --- */
+        .btn-massive {
+            background: transparent; color: var(--matrix-green);
+            border: 3px solid var(--matrix-green);
+            padding: 30px 60px; font-size: 2rem;
+            cursor: pointer; font-family: inherit; font-weight: bold;
+            margin: 20px; transition: 0.3s;
+        }
+        .btn-massive:hover { background: var(--matrix-green); color: black; box-shadow: 0 0 50px var(--matrix-green); }
+
+        /* --- MODALS --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); z-index: 9999; flex-direction: column;
+            justify-content: center; align-items: center;
+        }
+        canvas { border: 5px solid var(--matrix-green); background: #000; max-width: 90vw; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>DRASIOTECH_</h1>
+        <p>L'élite de l'ingénierie informatique. Nous réparons, sécurisons et optimisons vos systèmes avec une précision chirurgicale.</p>
+        <div style="margin-top: 40px;">
+            <a href="#video" class="btn-massive" style="text-decoration:none; font-size: 1.2rem; padding: 15px 30px;">DÉCOUVRIR</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>NOS EXPERTISES_</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🛠 RÉPARATION PC</h3>
+                <p>Hardware & Software. Nous redonnons vie à vos machines les plus critiques.</p>
+            </div>
+            <div class="card">
+                <h3>🛡 CYBER-DEFENSE</h3>
+                <p>Audits, pare-feu et suppression totale de malwares. Votre sécurité est notre priorité.</p>
+            </div>
+            <div class="card">
+                <h3>☁️ CLOUD & RESEAU</h3>
+                <p>Infrastructure haute performance et Wi-Fi professionnel sans zone morte.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="video">
+        <h2>DÉMONSTRATION_</h2>
+        <div class="video-box">
+            <iframe src="https://www.youtube.com/embed/3IAPPAZSWds" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <div class="marquee-zone">
+        <div class="marquee-inner" id="marquee">
+            </div>
+    </div>
+
+    <section id="fun">
+        <h2>TERMINAL_PLAY_</h2>
+        <button class="btn-massive" onclick="openGame('snake')">SNAKE.EXE</button>
+        <button class="btn-massive" onclick="openGame('miner')">MINER.EXE</button>
+        
+        <div style="margin-top: 50px;">
+            <h3>LAISSER UN AVIS_</h3>
+            <textarea id="user-comm" placeholder="Tapez votre feedback..." style="width: 80%; max-width: 600px; height: 100px; background: #000; border: 1px solid var(--matrix-green); color: white; padding: 15px; font-family: inherit;"></textarea><br>
+            <button class="btn-massive" style="font-size: 1rem; padding: 10px 20px;" onclick="alert('Message envoyé au serveur !')">PUBLIER</button>
+        </div>
+    </section>
+
+    <div id="modal-snake" class="modal">
+        <h2>SNAKE_PROTOCOL</h2>
+        <canvas id="sCanvas" width="400" height="400"></canvas>
+        <button class="btn-massive" onclick="closeGame()" style="font-size: 1rem;">[ FERMER ]</button>
+    </div>
+
+    <div id="modal-miner" class="modal">
+        <h2>BIT_MINER_CORE</h2>
+        <div id="pc" style="font-size:150px; cursor:pointer; user-select:none;">💻</div>
+        <p style="font-size:3rem;">BITS: <span id="bit-count" style="color:var(--matrix-green)">0</span></p>
+        <button class="btn-massive" onclick="closeGame()" style="font-size: 1rem;">[ QUITTER ]</button>
+    </div>
+
+    <script>
+        // --- AVIS ---
+        const feedback = ["5/5 - Incroyable !", "Rapide et efficace.", "Le sauveur de mon PC.", "Cyber-sécurité au top.", "Drasiotech est n°1."];
+        const m = document.getElementById('marquee');
+        m.innerHTML = [...feedback, ...feedback, ...feedback, ...feedback].map(t => `<span class="rev">★★★★★ ${t}</span>`).join('');
+
+        // --- MODALS ---
+        let gameLoop;
+        function openGame(g) {
+            document.getElementById('modal-' + g).style.display = 'flex';
+            if(g === 'snake') startSnake();
+        }
+        function closeGame() {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            clearInterval(gameLoop);
+        }
+
+        // --- MINER ---
+        let bits = 0;
+        document.getElementById('pc').onclick = () => {
+            bits++;
+            document.getElementById('bit-count').innerText = bits;
+        };
+
+        // --- SNAKE ---
+        function startSnake() {
+            const canvas = document.getElementById("sCanvas");
+            const ctx = canvas.getContext("2d");
+            const box = 20;
+            let snake = [{x: 10 * box, y: 10 * box}];
+            let food = {x: 5 * box, y: 5 * box};
+            let d = "RIGHT";
+
+            document.onkeydown = e => {
+                if(e.keyCode == 37 && d != "RIGHT") d = "LEFT";
+                if(e.keyCode == 38 && d != "DOWN") d = "UP";
+                if(e.keyCode == 39 && d != "LEFT") d = "RIGHT";
+                if(e.keyCode == 40 && d != "UP") d = "DOWN";
+            };
+
+            gameLoop = setInterval(() => {
+                ctx.fillStyle = "black"; ctx.fillRect(0,0,400,400);
+                for(let i=0; i<snake.length; i++) {
+                    ctx.fillStyle = (i==0) ? "#00ff41" : "#004411";
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                }
+                ctx.fillStyle = "red"; ctx.fillRect(food.x, food.y, box, box);
+
+                let sX = snake[0].x; let sY = snake[0].y;
+                if(d == "LEFT") sX -= box; if(d == "UP") sY -= box;
+                if(d == "RIGHT") sX += box; if(d == "DOWN") sY += box;
+
+                if(sX < 0) sX = 380; else if(sX >= 400) sX = 0;
+                if(sY < 0) sY = 380; else if(sY >= 400) sY = 0;
+
+                if(sX == food.x && sY == food.y) {
+                    food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box};
+                } else { snake.pop(); }
+
+                let head = {x: sX, y: sY};
+                if(snake.some(s => s.x == head.x && s.y == head.y)) {
+                    alert("CRASH DU SYSTÈME !"); closeGame();
+                }
+                snake.unshift(head);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
